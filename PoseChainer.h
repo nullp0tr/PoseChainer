@@ -1,7 +1,7 @@
 #ifndef PoseChainer_h
 #define PoseChainer_h
 
-#include <stdint.h>
+#include "Arduino.h"
 
 bool pushRecordBackwards(uint8_t record_size, uint8_t *chain_record, bool check_if_record_is_full);
 
@@ -11,8 +11,8 @@ void gEmptyRecord(uint8_t record_size, uint8_t *chain_record);
 
 struct sVibeChain
 {
-    volatile uint8_t vibe_level;
-    volatile int8_t found_chain;
+    uint8_t vibe_level;
+    int8_t found_chain;
 };
 
 class Chain
@@ -34,7 +34,7 @@ private:
 class PoseChainer
 {
 public:
-    void addChain(uint8_t pose_chain[], uint8_t chain_size);
+    bool addChain(uint8_t pose_chain[], uint8_t chain_size);
 
     void insertPoseToChainRecord(uint8_t pose_number);
 
@@ -54,6 +54,8 @@ private:
     bool _allowed;
 
     uint8_t _record_size;
+
+    uint8_t _chain_limit;
 
     uint8_t *_chain_record;
 

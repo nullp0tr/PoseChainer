@@ -1,6 +1,7 @@
 #include "PoseChainer.h"
 #include <stdlib.h>
 
+
 /*******************************************************/
 /*******************************************************/
 //--------------------PoseChainer----------------------//
@@ -9,11 +10,13 @@
 /*******************************************************/
 
 //
+
 PoseChainer::PoseChainer(uint8_t CHAIN_LIMIT, uint8_t RECORD_LIMIT)
 {
     _chains = (Chain *) malloc(sizeof(Chain) * CHAIN_LIMIT);
     _chain_record = (uint8_t *) malloc(sizeof(uint8_t) * RECORD_LIMIT);
     _record_size = RECORD_LIMIT;
+    _chain_limit = CHAIN_LIMIT;
     _num_of_chains = 0;
     _allowed = true;
 
@@ -24,10 +27,16 @@ PoseChainer::PoseChainer(uint8_t CHAIN_LIMIT, uint8_t RECORD_LIMIT)
 }
 
 //
-void PoseChainer::addChain(uint8_t *pose_chain, uint8_t chain_size)
+bool PoseChainer::addChain(uint8_t *pose_chain, uint8_t chain_size)
 {
-    _chains[_num_of_chains] = Chain(pose_chain, chain_size);
-    _num_of_chains += 1;
+    if (_num_of_chains < _chain_limit)
+    {
+        _chains[_num_of_chains] = Chain(pose_chain, chain_size);
+        _num_of_chains += 1;
+        return 1;
+    }
+    else
+        return 0;
 }
 
 //
