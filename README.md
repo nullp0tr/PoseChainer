@@ -5,7 +5,7 @@ The idea is to keep track of the latest registered poses from the Myo armband in
 
 [Tutorial/Blog post](https://blog.raquenaengineering.com/myo-powered-arduino-sketches-and-applications/)
 
-## Documentation 
+# Documentation 
 
 ### `PoseChainer(uint8_t CHAIN_LIMIT, uint8_t RECORD_LIMIT);`
 
